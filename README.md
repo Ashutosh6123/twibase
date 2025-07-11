@@ -1,10 +1,9 @@
 # 🐦 Twibase - A Mini Twitter Clone
 
-[![CI/CD Pipeline](https://github.com/Ashutosh6123/twibase/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/Ashutosh6123/twibase/actions/workflows/ci-cd.yml)
-[![Test Matrix](https://github.com/Ashutosh6123/twibase/actions/workflows/test-matrix.yml/badge.svg)](https://github.com/Ashutosh6123/twibase/actions/workflows/test-matrix.yml)
-[![Dependency Updates](https://github.com/Ashutosh6123/twibase/actions/workflows/dependency-updates.yml/badge.svg)](https://github.com/Ashutosh6123/twibase/actions/workflows/dependency-updates.yml)
-[![Docker Build](https://img.shields.io/badge/docker-ready-blue)](https://github.com/Ashutosh6123/twibase/pkgs/container/twibase)
-[![Render Deploy](https://img.shields.io/badge/deploy-render-46e3b7.svg)](https://render.com)
+[![Docker Build](https://img.shields.io/badge/docker-ready-blue)](https://github.com/Ashutosh6123/twibase)
+[![Python](https://img.shields.io/badge/python-3.11+-blue.svg)](https://python.org)
+[![Django](https://img.shields.io/badge/django-5.2.3-green.svg)](https://djangoproject.com)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 Twibase is a full-stack Django web application that mimics core features of Twitter, allowing users to register, login, post tweets (with optional images), edit or delete them, and view all tweets in a responsive interface.
 
@@ -29,19 +28,10 @@ Twibase is a full-stack Django web application that mimics core features of Twit
 
 ```
 twipost-main/
-├── .github/                    # GitHub Actions workflows
-│   └── workflows/              # CI/CD pipeline definitions
-│       ├── ci-cd.yml          # Main CI/CD pipeline with Render deployment
-│       ├── manual-deploy.yml  # Manual deployment workflow
-│       ├── test-matrix.yml    # Multi-version testing
-│       ├── dependency-updates.yml # Automated dependency updates
-│       └── release.yml        # Automated releases
 ├── .gitignore                   # Git ignore rules
 ├── .dockerignore               # Docker ignore rules
 ├── README.md                    # Project documentation
 ├── requirements.txt             # Python dependencies
-├── pytest.ini                  # Pytest configuration
-├── pyproject.toml              # Python project configuration
 ├── render.yaml                 # Render.com deployment configuration
 ├── Dockerfile                   # Docker development image
 ├── Dockerfile.prod             # Docker production image
@@ -233,41 +223,6 @@ Render.com provides an easy way to deploy your Django application with automatic
    DATABASE_URL=postgresql://user:pass@host:port/dbname
    ```
 
-4. **GitHub Actions Integration**:
-   - Add your Render deploy hook URL to GitHub secrets as `RENDER_DEPLOY_HOOK`
-   - Automatic deployments will trigger on main branch pushes
-   - Manual deployments available through GitHub Actions workflow
-
-#### Setting Up Deploy Hooks
-
-1. **Create Deploy Hook**:
-   - Go to your Render service settings
-   - Navigate to "Deploy Hooks" section
-   - Click "Create Deploy Hook"
-   - Copy the generated URL
-
-2. **Configure GitHub Secret**:
-   - Go to your GitHub repository settings
-   - Navigate to "Secrets and variables" → "Actions"
-   - Add a new secret named `RENDER_DEPLOY_HOOK`
-   - Paste your deploy hook URL as the value
-
-3. **Deployment Options**:
-   - **Automatic**: Deploys automatically on `main` branch pushes
-   - **Manual**: Use "Manual Deploy to Render" workflow in Actions tab
-   - **On-demand**: Trigger deploy hook URL directly with POST request
-
-#### Manual Deployment Workflow
-
-To trigger a manual deployment:
-1. Go to your repository's "Actions" tab
-2. Select "Manual Deploy to Render" workflow
-3. Click "Run workflow"
-4. Choose deployment options:
-   - **Environment**: production or staging
-   - **Run tests**: Enable/disable pre-deployment testing
-   - **Manual trigger**: Confirm deployment
-
 #### Render Services Architecture
 - **Web Service**: Django application with Gunicorn + Whitenoise
 - **PostgreSQL**: Managed database service  
@@ -285,60 +240,7 @@ To trigger a manual deployment:
 5. **Edit/Delete**: Manage your own tweets with edit/delete options
 6. **Admin Panel**: Access Django admin for advanced management
 
-## 🚀 CI/CD Pipeline
-
-This project includes comprehensive CI/CD pipelines for automated testing, security scanning, and deployment to Render.com.
-
-### Pipeline Features
-
-#### Automatic CI/CD (`ci-cd.yml`)
-Triggers on `main` and `develop` branch pushes:
-- **Testing**: Django tests with PostgreSQL and Redis
-- **Code Quality**: Flake8 linting and Black formatting checks
-- **Security Scanning**: Safety and Bandit security analysis
-- **Coverage**: Code coverage reporting with Codecov
-- **Docker Build**: Production-ready container images
-- **Render Deployment**: Automatic deployment on main branch
-
-#### Manual Deployment (`manual-deploy.yml`)
-On-demand deployment with configurable options:
-- **Environment Selection**: Choose production or staging
-- **Pre-deployment Testing**: Optional test execution
-- **Deployment Confirmation**: Manual trigger confirmation
-- **Status Monitoring**: Detailed deployment feedback
-
-#### Test Matrix (`test-matrix.yml`)
-Comprehensive compatibility testing:
-- **Multi-OS**: Ubuntu, Windows, macOS
-- **Multi-Python**: 3.9, 3.10, 3.11, 3.12
-- **Multi-Django**: 4.2, 5.0, 5.1, 5.2
-- **Scheduled**: Weekly compatibility checks
-
-#### Automated Maintenance
-- **Dependency Updates**: Weekly dependency security updates
-- **Release Management**: Automated semantic versioning
-- **Security Monitoring**: Continuous vulnerability scanning
-
-### GitHub Actions Secrets Required
-
-```bash
-# Required for Render deployment
-RENDER_DEPLOY_HOOK=https://api.render.com/deploy/srv-xxxxx?key=xxxxx
-
-# Optional for enhanced features
-CODECOV_TOKEN=your-codecov-token
-```
-
-### Deployment Workflow
-
-1. **Push to main** → Automatic deployment
-2. **Manual trigger** → On-demand deployment via Actions tab
-3. **Security checks** → All deployments include security scanning
-4. **Status monitoring** → Real-time deployment feedback
-
----
-
-## 🔧 Development
+##  Development
 
 ### Local Development
 - **Django Version**: 5.2.3
